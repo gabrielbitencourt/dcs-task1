@@ -59,7 +59,7 @@ app.post('/metrics/:id', (req, res) => {
     }
 });
 
-const port = 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Listening at port ${port};`);
 });
