@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Deep Consulting Solutions - Task 1",
+    "description": "Task one from Deep Consulting Solutions hiring process."
+  },
+  "host": "task1.bitencourt.ga",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/metrics/{id}": {
+      "get": {
+        "tags": [],
+        "description": "Get metrics sum for id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [],
+        "description": "Create new metric for id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "metric",
+            "in": "body",
+            "description": "Metric value",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntity"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "example": 5
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "xml": {
+        "name": "Metric"
+      }
+    },
+    "Success": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": false
+        },
+        "data": {
+          "type": "number",
+          "example": 5
+        }
+      },
+      "required": [
+        "error",
+        "data"
+      ],
+      "xml": {
+        "name": "Success"
+      }
+    },
+    "NotFound": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Key example not found"
+        }
+      },
+      "required": [
+        "error",
+        "message"
+      ],
+      "xml": {
+        "name": "NotFound"
+      }
+    },
+    "UnprocessableEntity": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Value not sent or not a number"
+        }
+      },
+      "required": [
+        "error",
+        "message"
+      ],
+      "xml": {
+        "name": "UnprocessableEntity"
+      }
+    },
+    "InternalServerError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Unexpected error"
+        }
+      },
+      "required": [
+        "error",
+        "message"
+      ],
+      "xml": {
+        "name": "InternalServerError"
+      }
+    }
+  }
+}
